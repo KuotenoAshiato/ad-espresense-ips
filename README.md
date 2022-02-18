@@ -68,6 +68,7 @@ ESPresenseIps:
     name: Watch
     timeout: 30
     away_timeout: 120
+  useroomplan: true
   roomplans:
   - name: living
     y1: 0.0
