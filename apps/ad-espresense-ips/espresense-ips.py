@@ -68,7 +68,10 @@ class ESPresenseIps(hass.Hass):
                 pos = device["x0"].tolist()
                 #self.call_service("device_tracker/see", dev_id = id + "_see", gps = [self.config["latitude"]+(pos[1]/111111), self.config["longitude"]+(pos[0]/111111)], location_name="home")
                 #self.log(f"{room} {id}: {pos}")
-                roomname = room_solve(self,round(pos[0],2,),round(pos[1],2))
+                if self.args["useroomplan"]:
+                    roomname = room_solve(self,round(pos[0],2,),round(pos[1],2))
+                else:
+                    roomname = "none"
                 self.mqtt.mqtt_publish(f"{self.args.get('ips_topic', 'espresense/ips')}/{id}", json.dumps({"name":name, "x":round(pos[0],2),"y":round(pos[1],2),"z":round(pos[2],2), "fixes":len(distance_to_stations),"measures":device["measures"],"currentroom":roomname}))
                 self.mqtt.mqtt_publish(f"{self.args.get('location_topic', 'espresense/location')}/{id}", json.dumps({"name":name, "longitude":(self.config["longitude"]+(pos[0]/111111)),"latitude":(self.config["latitude"]+(pos[1]/111111)),"elevation":(self.config.get("elevation","0")+pos[2]), "fixes":len(distance_to_stations),"measures":device["measures"]}))
 
