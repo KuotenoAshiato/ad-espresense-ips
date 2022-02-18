@@ -90,3 +90,14 @@ ESPresenseIps:
     y2: 13.5
     x2: 5.0
 ```
+For the roomplan the coordinates have to be set like this:
+```
+   
+                           y2
+   |----------------------*| x2
+   |                       |
+   |                       |
+   |                       |
+ y1|*______________________|
+       x1                
+```
